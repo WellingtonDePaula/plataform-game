@@ -1,16 +1,17 @@
 //variáveis da tela
-var alturaDaTela = innerHeight;
-var larguraDaTela = innerWidth;
+var screenHeight = innerHeight;
+var screenWidth = innerWidth;
 //código
 function setup() {
-    createCanvas(larguraDaTela, alturaDaTela);
+    createCanvas(screenWidth, screenHeight);
   }
 function draw() {
 //cenário e processos de início
-background(15);
+background(50);
 
 //player
 drawPlayer();
 key_Pressed();
 playerStateMachine();
+borderCollision();
 }

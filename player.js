@@ -2,9 +2,9 @@ var right = 0;
 var left = 0;
 var keyPressed = right + left;
 
-var player = {
-    x: larguraDaTela/2,
-    y: alturaDaTela/2,
+let player = {
+    x: screenWidth/2,
+    y: screenHeight/2,
     state: "idle",
 
     velh: 0,
@@ -13,12 +13,12 @@ var player = {
     velv: 0,
     max_velv: 5,
 
-    largura: 30,
-    altura: 30,
+    width: 30,
+    height: 30,
 };
 
 function drawPlayer(){
-    rect(player.x, player.y, player.largura, player.altura);
+    rect(player.x, player.y, player.width, player.height);
 }
 
 function key_Pressed(){
@@ -44,16 +44,35 @@ function playerStateMachine(){
     switch(player.state) {
         case "idle":
             {
-                player.velh = 0;
-                if(keyPressed != 0){
+                if(player.velh && keyPressed != 0){
                     player.state = "moving";
                 }
+                player.velh = 0;
                 break;
             }
         case "moving":
             {
                 player.x += player.velh;
+                if(player.velh === 0){
+                    player.state = "idle";
+                }
                 break;
             }
+    }
+}
+
+/////////////////////////////////////////////
+//Collisions:
+
+function borderCollision() {
+
+
+    console.log(keyPressed, player.velh, player.state)
+    if(player.x + player.width >= screenWidth) {
+        player.state = "idle";
+    }
+    
+    if(player.x <= 0){
+        player.state = "idle";
     }
 }
